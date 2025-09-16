@@ -15,7 +15,7 @@ The workflow runs:
 
 ### What it does:
 
-1. **Sets up .NET 10.0.x** using `actions/setup-dotnet@v4`
+1. **Sets up .NET 10.0.x** using `actions/setup-dotnet@v5`
 2. **Verifies installation** with `dotnet --version`
 3. **Displays comprehensive .NET info** including installed SDKs and runtimes
 4. **Creates and runs a test console application** to validate functionality
