@@ -1,0 +1,35 @@
+name: Test .NET Version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-dotnet-version:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up .NET 10.0.x
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Verify .NET 10.0.x Installation
+        run: dotnet --version
+
+      - name: Display .NET Info
+        run: dotnet --info
+
+      - name: List installed .NET SDKs
+        run: dotnet --list-sdks
+
+      - name: List installed .NET runtimes
+        run: dotnet --list-runtimes
+
+      - name: Create and test a simple console application
+        run: |
+          dotnet new console -n TestApp --force
+          cd TestApp
+          dotnet run
