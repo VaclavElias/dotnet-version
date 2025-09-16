@@ -1,13 +1,6 @@
 name: Test .NET Version
 
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  schedule:
-    # Run daily at 6:00 AM UTC to check for new .NET versions
-    - cron: '0 6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -16,14 +9,13 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up .NET 10.0.x
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.x
-      
-      # Verify the installed .NET SDK version
+
       - name: Verify .NET 10.0.x Installation
         run: dotnet --version
 
