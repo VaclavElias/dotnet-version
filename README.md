@@ -2,7 +2,7 @@
 
 [![Test .NET Version](https://github.com/VaclavElias/dotnet-version/actions/workflows/dotnet-version-test.yml/badge.svg)](https://github.com/VaclavElias/dotnet-version/actions/workflows/dotnet-version-test.yml)
 
-Test dotnet version in GitHub Action
+Test dotnet version in GitHub Action.
 
 ## Purpose
 
