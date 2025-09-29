@@ -28,6 +28,40 @@ jobs:
       - name: List installed .NET runtimes
         run: dotnet --list-runtimes
 
+      - name: Check MSBuild (Visual Studio msbuild.exe) on PATH
+        shell: pwsh
+        run: |
+          if (Get-Command msbuild -ErrorAction SilentlyContinue) {
+            Write-Host "MSBuild is installed (msbuild on PATH):"
+            # msbuild has a -version argument on most Visual Studio/MSBuild installs
+            try {
+              msbuild -version
+            } catch {
+              Write-Host "msbuild -version failed, printing msbuild help instead:"
+              msbuild -help
+            }
+            Write-Host "MSBuild path(s):"
+            Get-Command msbuild | Select-Object -ExpandProperty Source
+          } else {
+            Write-Host "msbuild executable not found on PATH."
+          }
+
+      - name: Check dotnet-provided MSBuild
+        shell: pwsh
+        run: |
+          if (Get-Command dotnet -ErrorAction SilentlyContinue) {
+            Write-Host "MSBuild info from 'dotnet --info':"
+            dotnet --info | Select-String -Pattern "MSBuild"
+            Write-Host "`nAttempt to run 'dotnet msbuild -version' (may not be supported on all SDKs):"
+            try {
+              dotnet msbuild -version
+            } catch {
+              Write-Host "dotnet msbuild -version failed or is not supported on this runner."
+            }
+          } else {
+            Write-Host "dotnet not found."
+          }
+
       - name: Create and test a simple console application
         run: |
           dotnet new console -n TestApp --force
